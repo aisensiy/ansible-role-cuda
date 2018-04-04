@@ -17,10 +17,21 @@
   apt: 
     update_cache: yes
   ignore_errors: yes
+  when: result is succeeded
 
 - name: install cuda
   apt:
     name: "{{ cuda }}"
     state: present
     allow_unauthenticated: yes
+  when: result is succeeded
+
+- name: mv cudnn deb to server
+  get_url: 
+    src: "{{ cudnn_deb_file }}"
+    dest: /tmp/cudnn.deb
+  when: result is succeeded
+
+- name: install nvidia cudnn deb
+  shell: dpkg -i /tmp/cudnn.deb
   when: result is succeeded
