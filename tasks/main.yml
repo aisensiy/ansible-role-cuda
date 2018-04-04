@@ -1,2 +1,21 @@
 ---
-# tasks file for ansible-role-cuda
+- name: check nvidia-smi
+  shell: nvidia-smi
+  register: result
+
+- name: mv deb file to server
+  copy: 
+    src: "{{ cuda_deb_file }}"
+    dest: /tmp/cuda.deb
+  when: result is succeeded
+
+- name: add nvidia cuda deb
+  shell: dpkg -i /tmp/cuda.deb
+  when: result is succeeded
+
+- name: install cuda
+  apt:
+    name: cuda
+    state: present
+    update_cache: yes
+  when: result is succeeded
