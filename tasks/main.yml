@@ -26,9 +26,15 @@
     allow_unauthenticated: yes
   when: result is succeeded
 
+- name: restart
+  shell: shutdown -r +1
+  async: 0
+  poll: 0
+  ignore_errors: true
+
 - name: mv cudnn deb to server
   get_url: 
-    src: "{{ cudnn_deb_file }}"
+    url: "{{ cudnn_deb_file }}"
     dest: /tmp/cudnn.deb
   when: result is succeeded
 
