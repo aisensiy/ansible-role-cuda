@@ -32,6 +32,9 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: cuda
   roles:
     - role: ansible-role-cuda
+      cuda_deb_file: "cuda-repo-ubuntu1604_9.0.176-1_amd64.deb"
+      cudnn_deb_file: "https://s3/libcudnn7_7.1.2.21-1%2Bcuda9.0_amd64.deb"
+      cuda: "cuda-9-0"
 ```
 
 License
