@@ -1,38 +1,40 @@
-Role Name
+Ansible Role Cuda
 =========
 
-A brief description of the role goes here.
+Install Nvidia cuda toolkit for deeplearning frameworks.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+The machine should have at least one cuda compatible gpu and compatible kernel version. For more information please go to [cuda installation guide](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#axzz4VZnqTJ2A).
+
+This ansible role is only tested on ansible 2.5+.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+cuda_deb_file: "<deb file download from nvidia with network installation option>"
+cuda: "<the cuda version of your deb file>"
+cudnn_deb_file: "<the whole cudnn deb file host by your self>"
+```
 
-Dependencies
-------------
+First, pick right cuda toolkit for you from [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive). Choose the deb network version, download it in your `files` folder and put the name to `cuda_deb_file`, right now this ansible script can only support deb(network) installation workflow.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Then download the cudnn deb file compatible with the cudn toolkit, the nvidia require login to download the cudnn lib so your have to download it and host it in somewhere else (like s3) for auto download to your server. Then put the url in `cudnn_deb_file`.
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: cuda
+  roles:
+    - role: ansible-role-cuda
+```
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT
