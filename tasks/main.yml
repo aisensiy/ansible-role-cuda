@@ -10,11 +10,9 @@
   when: result is succeeded
 
 - name: add nvidia cuda deb
-  shell: dpkg -i /tmp/cuda.deb
-  when: result is succeeded
-
-- name: add nvidia cuda key
-  shell: apt-key adv --fetch-keys {{ cuda_key_url }}
+  copy:
+    src: "cuda.list"
+    dest: /etc/apt/sources.list/
   when: result is succeeded
 
 - name: apt update
