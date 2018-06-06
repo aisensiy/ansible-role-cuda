@@ -2,4 +2,5 @@
 
 cuda_deb_file: "cuda-repo-ubuntu1604_9.0.176-1_amd64.deb"
 cudnn_deb_file: "https://s3.cn-north-1.amazonaws.com.cn/openbayes-installation-caches/libcudnn7_7.1.2.21-1%2Bcuda9.0_amd64.deb"
+cuda_key_url: "http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub"
 cuda: "cuda-9-0"
