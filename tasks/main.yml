@@ -12,7 +12,7 @@
 - name: add nvidia cuda deb
   copy:
     src: "cuda.list"
-    dest: /etc/apt/sources.list/
+    dest: /etc/apt/sources.list.d/
   when: result is succeeded
 
 - name: apt update
